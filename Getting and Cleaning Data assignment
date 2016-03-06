@@ -89,13 +89,17 @@ Mean_std<-subset(Total_data_set,select=selected_columns)
 ## to lookup all the columns names in this case (plus three extra columns)
 selected_columns
 
-names(Mean_std)<-gsub("^t", "time", names(Mean_std))
-names(Mean_std)<-gsub("^f", "frequency", names(Mean_std))
+##Change the names of all the column names
+names(Mean_std)<-gsub("^t", "MEANoftime", names(Mean_std))
+names(Mean_std)<-gsub("^f", "MEANoffrequency", names(Mean_std))
 
 names(Mean_std)<-gsub("Acc", "Accelerometer", names(Mean_std))
 names(Mean_std)<-gsub("Gyro", "Gyroscope", names(Mean_std))
 names(Mean_std)<-gsub("Mag", "Magnitude", names(Mean_std))
 names(Mean_std)<-gsub("BodyBody", "Body", names(Mean_std))
+names(Mean_std)<-gsub("-mean()", "mean", names(Mean_std))
+names(Mean_std)<-gsub("-std", "Standaardeviation", names(Mean_std))
+
 
 #########################################
 ##Tidy data
@@ -107,3 +111,5 @@ Tidy_data<-Tidy_data[order(Tidy_data$"Subject",Tidy_data$"Activity"),]
 write.table(Tidy_data, file = "tidydata.txt",row.name=FALSE)
 
 #########################################
+str(Tidy_data)
+summary(Tidy_data)
